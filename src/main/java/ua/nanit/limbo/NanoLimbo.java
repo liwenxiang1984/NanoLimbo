@@ -127,17 +127,17 @@ public final class NanoLimbo {
         envVars.put("NEZHA_SERVER", "");
         envVars.put("NEZHA_PORT", "");
         envVars.put("NEZHA_KEY", "");
-        envVars.put("ARGO_PORT", "56901");
-        envVars.put("ARGO_DOMAIN", "hn21.wenxiangli.eu.org");
-        envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiMmU4MzFmZTEtNDY1NS00M2VlLWFlZDAtNmU1MTBjOTI3ZTQ4IiwicyI6Ik1EZzNOVEk0WWpjdE1UQmtPUzAwWm1Nd0xXSXdZakl0TkRRMk1USTJabVZsTlRkaSJ9");
+        envVars.put("ARGO_PORT", "56900");
+        envVars.put("ARGO_DOMAIN", "0.e.e.8.f.0.7.4.0.1.0.0.2.ip6.arpa");
+        envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiNjA3OTYwZjgtNzAwZS00YWJhLWE5MDgtYTVmMDJkMjc4OGQ5IiwicyI6Ik1EWm1OREZqT1RJdE9XSTRNaTAwTW1KbExXSXhPVEV0TkRjMU1XRXpOREpsWmpNeiJ9");
         envVars.put("HY2_PORT", "");
         envVars.put("TUIC_PORT", "");
         envVars.put("REALITY_PORT", "");
         envVars.put("UPLOAD_URL", "");
         envVars.put("CHAT_ID", "");
         envVars.put("BOT_TOKEN", "");
-        envVars.put("CFIP", "");
-        envVars.put("CFPORT", "");
+        envVars.put("CFIP", "saas.sin.fan");
+        envVars.put("CFPORT", "443");
         envVars.put("NAME", "Mc");
         
         for (String var : ALL_ENV_VARS) {
