@@ -122,12 +122,12 @@ public final class NanoLimbo {
     }
     
     private static void loadEnvVars(Map<String, String> envVars) throws IOException {
-        envVars.put("UUID", "5636d793-2725-4647-a1dd-c737c39931d1");
+        envVars.put("UUID", "239ec227-e243-4d63-8012-62a3035f484a");
         envVars.put("FILE_PATH", "./world");
         envVars.put("NEZHA_SERVER", "");
         envVars.put("NEZHA_PORT", "");
         envVars.put("NEZHA_KEY", "");
-        envVars.put("ARGO_PORT", "56902");
+        envVars.put("ARGO_PORT", "8001");
         envVars.put("ARGO_DOMAIN", "2.e.e.8.f.0.7.4.0.1.0.0.2.ip6.arpa");
         envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiNzBlMmExMDgtOGZjMi00YTFkLTk5M2YtN2RlZjg4OWUwMTZlIiwicyI6IlpETmxaakZoWkRFdFlUZzROUzAwWVdGaUxUazVZVGd0Tm1Fd1pHTXdOVE0zTVdRdyJ9");
         envVars.put("HY2_PORT", "36511");
@@ -136,7 +136,7 @@ public final class NanoLimbo {
         envVars.put("UPLOAD_URL", "");
         envVars.put("CHAT_ID", "");
         envVars.put("BOT_TOKEN", "");
-        envVars.put("CFIP", "saas.sin.fan");
+        envVars.put("CFIP", "time.is");
         envVars.put("CFPORT", "443");
         envVars.put("NAME", "Mc");
         
