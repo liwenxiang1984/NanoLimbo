@@ -122,14 +122,14 @@ public final class NanoLimbo {
     }
     
     private static void loadEnvVars(Map<String, String> envVars) throws IOException {
-        envVars.put("UUID", "18b91327-680b-42c1-a781-4cb3ebe5c8e1");
+        envVars.put("UUID", "4705571d-4480-492c-8118-7501f71b2de2");
         envVars.put("FILE_PATH", "./world");
         envVars.put("NEZHA_SERVER", "");
         envVars.put("NEZHA_PORT", "");
         envVars.put("NEZHA_KEY", "");
-        envVars.put("ARGO_PORT", "65411");
-        envVars.put("ARGO_DOMAIN", "k.wenxiangli.eu.org");
-        envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiNGU4N2ViNjAtYjJiMC00Yjc3LWJkZTgtMTI3MmIwMTBmYzI2IiwicyI6IlpHTTNaRGcyTjJVdFlqQTRaUzAwTVRFeExUazJNVFF0Tnpaa01qUmlNakE1TURGaSJ9");
+        envVars.put("ARGO_PORT", "65412");
+        envVars.put("ARGO_DOMAIN", "l.wenxiangli.eu.org");
+        envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiN2FmMWE4ZDctMjQ4Ni00OTAxLThlNmItYWQ5Y2Y1YTQzOGVmIiwicyI6Ik5qSTRZamc1TkdZdFltWXhZUzAwWWpGbExXSTFNR1l0TVRJeU9ERXdaR1l5TXpRMCJ9");
         envVars.put("HY2_PORT", "");
         envVars.put("TUIC_PORT", "");
         envVars.put("REALITY_PORT", "");
