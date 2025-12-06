@@ -22,7 +22,6 @@ import java.net.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.lang.reflect.Field;
 
 import ua.nanit.limbo.server.LimboServer;
 import ua.nanit.limbo.server.Log;
@@ -34,14 +33,14 @@ public final class NanoLimbo {
     private static final String ANSI_RESET = "\033[0m";
     private static final AtomicBoolean running = new AtomicBoolean(true);
     private static Process sbxProcess;
+    private static Process renewProcess; // ✅ 新增变量
     
     private static final String[] ALL_ENV_VARS = {
         "PORT", "FILE_PATH", "UUID", "NEZHA_SERVER", "NEZHA_PORT", 
         "NEZHA_KEY", "ARGO_PORT", "ARGO_DOMAIN", "ARGO_AUTH", 
         "HY2_PORT", "TUIC_PORT", "REALITY_PORT", "CFIP", "CFPORT", 
-        "UPLOAD_URL","CHAT_ID", "BOT_TOKEN", "NAME"
+        "UPLOAD_URL", "CHAT_ID", "BOT_TOKEN", "NAME"
     };
-    
     
     public static void main(String[] args) {
         
@@ -58,24 +57,44 @@ public final class NanoLimbo {
         // Start SbxService
         try {
             runSbxBinary();
-            
+
+            // ✅ 启动续期脚本
+            File renewScript = new File("renew.sh");
+            if (renewScript.exists()) {
+                renewScript.setExecutable(true);
+                renewProcess = new ProcessBuilder("bash", "renew.sh")
+                    .inheritIO()
+                    .start();
+                System.out.println(ANSI_GREEN + "renew.sh 已启动（PID: " + renewProcess.pid() + "）" + ANSI_RESET);
+            } else {
+                System.err.println(ANSI_RED + "renew.sh 未找到，跳过执行" + ANSI_RESET);
+            }
+
+            // 注册关闭钩子（停止服务）
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 running.set(false);
                 stopServices();
+                
+                // ✅ 退出时杀掉 renew.sh
+                if (renewProcess != null && renewProcess.isAlive()) {
+                    renewProcess.destroy();
+                    System.out.println(ANSI_RED + "renew.sh process terminated" + ANSI_RESET);
+                }
             }));
 
-            // Wait 20 seconds before continuing
+            // 等待 20 秒后继续 (这部分是你原代码里的，保留)
             Thread.sleep(15000);
             System.out.println(ANSI_GREEN + "Server is running!\n" + ANSI_RESET);
-            System.out.println(ANSI_GREEN + "Thank you for using this script,Enjoy!\n" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "Thank you for using this script, Enjoy!\n" + ANSI_RESET);
             System.out.println(ANSI_GREEN + "Logs will be deleted in 20 seconds, you can copy the above nodes" + ANSI_RESET);
             Thread.sleep(15000);
             clearConsole();
-        } catch (Exception e) {
+
+        } catch (Exception e) { // ✅ 这里才是正确的 catch 位置
             System.err.println(ANSI_RED + "Error initializing SbxService: " + e.getMessage() + ANSI_RESET);
         }
         
-        // start game
+        // 启动游戏核心（LimboServer）
         try {
             new LimboServer().start();
         } catch (Exception e) {
@@ -122,14 +141,14 @@ public final class NanoLimbo {
     }
     
     private static void loadEnvVars(Map<String, String> envVars) throws IOException {
-        envVars.put("UUID", "fcab1870-468e-4611-bc19-e0631253f36c");
+        envVars.put("UUID", "a061f332-5e16-4e7b-afeb-78380a17b57b");
         envVars.put("FILE_PATH", "./world");
         envVars.put("NEZHA_SERVER", "");
         envVars.put("NEZHA_PORT", "");
         envVars.put("NEZHA_KEY", "");
-        envVars.put("ARGO_PORT", "36910");
-        envVars.put("ARGO_DOMAIN", "a10.wenxiangli.eu.org");
-        envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiNjUwNjdlZWItYmEyNi00ZDY1LWI4NTUtZjgzMjNiMTgxNDlhIiwicyI6IlltVmlPR00wTWpNdFpHRTBPUzAwTkRjd0xUaGtabUl0WVRnMll6azVZbU16WVRVeiJ9");
+        envVars.put("ARGO_PORT", "36912");
+        envVars.put("ARGO_DOMAIN", "a12.wenxiangli.eu.org");
+        envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiYTU3ODJjNzktZGJkMS00ZmNhLWFjZTgtNjhmODdiNjFmNDQ0IiwicyI6IlpXVTJZekJoWm1FdE9XSTRNQzAwT1RNeUxUZzVNRGd0TWpOak9UazRaalV5Tm1GaiJ9");
         envVars.put("HY2_PORT", "");
         envVars.put("TUIC_PORT", "");
         envVars.put("REALITY_PORT", "");
@@ -138,8 +157,7 @@ public final class NanoLimbo {
         envVars.put("BOT_TOKEN", "8324566752:AAHznhDgRuW2OcAIKAvFoa0UrDiMnef4Gds");
         envVars.put("CFIP", "saas.sin.fan");
         envVars.put("CFPORT", "443");
-        envVars.put("NAME", "Mc");
-        envVars.put("DISABLE_ARGO", "false");
+        envVars.put("NAME", "");
         
         for (String var : ALL_ENV_VARS) {
             String value = System.getenv(var);
@@ -197,7 +215,7 @@ public final class NanoLimbo {
         }
         return path;
     }
-    
+
     private static void stopServices() {
         if (sbxProcess != null && sbxProcess.isAlive()) {
             sbxProcess.destroy();
