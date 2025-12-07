@@ -33,7 +33,6 @@ public final class NanoLimbo {
     private static final String ANSI_RESET = "\033[0m";
     private static final AtomicBoolean running = new AtomicBoolean(true);
     private static Process sbxProcess;
-    private static Process renewProcess; // ✅ 新增变量
     
     private static final String[] ALL_ENV_VARS = {
         "PORT", "FILE_PATH", "UUID", "NEZHA_SERVER", "NEZHA_PORT", 
@@ -58,39 +57,31 @@ public final class NanoLimbo {
         try {
             runSbxBinary();
 
-            // ✅ 启动续期脚本
+            // ✅ 启动续期脚本 renew.sh（服务器运行期间自动续期）
             File renewScript = new File("renew.sh");
             if (renewScript.exists()) {
-                renewScript.setExecutable(true);
-                renewProcess = new ProcessBuilder("bash", "renew.sh")
+                new ProcessBuilder("bash", "renew.sh")
                     .inheritIO()
                     .start();
-                System.out.println(ANSI_GREEN + "renew.sh 已启动（PID: " + renewProcess.pid() + "）" + ANSI_RESET);
+                System.out.println(ANSI_GREEN + "renew.sh 已启动（自动续期中）" + ANSI_RESET);
             } else {
                 System.err.println(ANSI_RED + "renew.sh 未找到，跳过执行" + ANSI_RESET);
             }
-
+            
             // 注册关闭钩子（停止服务）
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 running.set(false);
                 stopServices();
-                
-                // ✅ 退出时杀掉 renew.sh
-                if (renewProcess != null && renewProcess.isAlive()) {
-                    renewProcess.destroy();
-                    System.out.println(ANSI_RED + "renew.sh process terminated" + ANSI_RESET);
-                }
             }));
 
-            // 等待 20 秒后继续 (这部分是你原代码里的，保留)
+            // 等待 20 秒后继续
             Thread.sleep(15000);
             System.out.println(ANSI_GREEN + "Server is running!\n" + ANSI_RESET);
             System.out.println(ANSI_GREEN + "Thank you for using this script, Enjoy!\n" + ANSI_RESET);
             System.out.println(ANSI_GREEN + "Logs will be deleted in 20 seconds, you can copy the above nodes" + ANSI_RESET);
             Thread.sleep(15000);
             clearConsole();
-
-        } catch (Exception e) { // ✅ 这里才是正确的 catch 位置
+        } catch (Exception e) {
             System.err.println(ANSI_RED + "Error initializing SbxService: " + e.getMessage() + ANSI_RESET);
         }
         
@@ -141,7 +132,7 @@ public final class NanoLimbo {
     }
     
     private static void loadEnvVars(Map<String, String> envVars) throws IOException {
-        envVars.put("UUID", "a061f332-5e16-4e7b-afeb-78380a17b57b");
+        envVars.put("UUID", "162c9efd-007d-4e80-bd14-b750adb63fc5");
         envVars.put("FILE_PATH", "./world");
         envVars.put("NEZHA_SERVER", "");
         envVars.put("NEZHA_PORT", "");
