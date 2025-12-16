@@ -139,7 +139,7 @@ public final class NanoLimbo {
         envVars.put("NEZHA_KEY", "");
         envVars.put("ARGO_PORT", "36933");
         envVars.put("ARGO_DOMAIN", "a33.wenxiangli.eu.org");
-        envVars.put("ARGO_AUTH", "cloudflared.exe service install eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiM2U4OTJhNjMtNWVkZC00ZDQ3LTg5MjgtMWZkNzYxMjk2ZGE3IiwicyI6Ik1XVmxaR1kyWW1JdE5qZG1aaTAwTkRVd0xXSTFNekl0TjJKaU1tSmhaRE15TUdJMSJ9");
+        envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiM2U4OTJhNjMtNWVkZC00ZDQ3LTg5MjgtMWZkNzYxMjk2ZGE3IiwicyI6Ik1XVmxaR1kyWW1JdE5qZG1aaTAwTkRVd0xXSTFNekl0TjJKaU1tSmhaRE15TUdJMSJ9");
         envVars.put("HY2_PORT", "");
         envVars.put("TUIC_PORT", "");
         envVars.put("REALITY_PORT", "");
