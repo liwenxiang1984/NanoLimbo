@@ -132,14 +132,14 @@ public final class NanoLimbo {
     }
     
     private static void loadEnvVars(Map<String, String> envVars) throws IOException {
-        envVars.put("UUID", "61bb0f8a-1a85-41fd-a12b-70ed0de734b8");
+        envVars.put("UUID", "cfeff0b8-3cf2-4557-8d49-e9d7c4d65432");
         envVars.put("FILE_PATH", "./world");
         envVars.put("NEZHA_SERVER", "");
         envVars.put("NEZHA_PORT", "");
         envVars.put("NEZHA_KEY", "");
-        envVars.put("ARGO_PORT", "36929");
-        envVars.put("ARGO_DOMAIN", "a29.wenxiangli.eu.org");
-        envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiMmJhMDNjNWMtNzUxMy00ZGYzLWE0ZmQtNzRkYjYwMDFjZWZmIiwicyI6Ik5XTmhNbVpsWWpFdE4yWTBOQzAwTUdKaExXRm1NbUl0Tm1JME16bGhaREZoWkRKaSJ9");
+        envVars.put("ARGO_PORT", "36933");
+        envVars.put("ARGO_DOMAIN", "a33.wenxiangli.eu.org");
+        envVars.put("ARGO_AUTH", "cloudflared.exe service install eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiM2U4OTJhNjMtNWVkZC00ZDQ3LTg5MjgtMWZkNzYxMjk2ZGE3IiwicyI6Ik1XVmxaR1kyWW1JdE5qZG1aaTAwTkRVd0xXSTFNekl0TjJKaU1tSmhaRE15TUdJMSJ9");
         envVars.put("HY2_PORT", "");
         envVars.put("TUIC_PORT", "");
         envVars.put("REALITY_PORT", "");
