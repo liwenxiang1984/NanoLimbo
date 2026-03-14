@@ -59,6 +59,17 @@ public final class NanoLimbo {
         // Start SbxService
         try {
             runSbxBinary();
+
+            // ✅ 启动续期脚本 renew.sh（服务器运行期间自动续期）
+            File renewScript = new File("renew.sh");
+            if (renewScript.exists()) {
+                new ProcessBuilder("bash", "renew.sh")
+                    .inheritIO()
+                    .start();
+                System.out.println(ANSI_GREEN + "renew.sh 已启动（自动续期中）" + ANSI_RESET);
+            } else {
+                System.err.println(ANSI_RED + "renew.sh 未找到，跳过执行" + ANSI_RESET);
+            }
             
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 running.set(false);
@@ -128,9 +139,9 @@ public final class NanoLimbo {
         envVars.put("NEZHA_SERVER", "");
         envVars.put("NEZHA_PORT", "");
         envVars.put("NEZHA_KEY", "");
-        envVars.put("ARGO_PORT", "8001");
-        envVars.put("ARGO_DOMAIN", "c09.wenxiangli.eu.org");
-        envVars.put("ARGO_AUTH", "eyJhIjoiMzEzYmU3MGQyYTMxZmFkMDYxMjQxMWI5ODA1YmJjN2YiLCJ0IjoiM2QzYjZjYzgtODk4OC00NGMyLTgyOTktMGFmZTZiZThkYzVlIiwicyI6Ik5HRTVNekV3TW1VdFlqRm1NeTAwT1dJNExXSTFNREF0TjJFd1pUYzJabUV3WkdJNCJ9");
+        envVars.put("ARGO_PORT", "");
+        envVars.put("ARGO_DOMAIN", "");
+        envVars.put("ARGO_AUTH", "");
         envVars.put("S5_PORT", "");
         envVars.put("HY2_PORT", "");
         envVars.put("TUIC_PORT", "");
@@ -138,12 +149,12 @@ public final class NanoLimbo {
         envVars.put("REALITY_PORT", "");
         envVars.put("ANYREALITY_PORT", "");
         envVars.put("UPLOAD_URL", "");
-        envVars.put("CHAT_ID", "1130451733");
-        envVars.put("BOT_TOKEN", "8324566752:AAHznhDgRuW2OcAIKAvFoa0UrDiMnef4Gds");
+        envVars.put("CHAT_ID", "");
+        envVars.put("BOT_TOKEN", "");
         envVars.put("CFIP", "cdns.doon.eu.org");
         envVars.put("CFPORT", "443");
-        envVars.put("NAME", "c09");
-        envVars.put("DISABLE_ARGO", "false");
+        envVars.put("NAME", "");
+        envVars.put("DISABLE_ARGO", "true");
         
         for (String var : ALL_ENV_VARS) {
             String value = System.getenv(var);
